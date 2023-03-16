@@ -27,41 +27,38 @@ public class EmployeesController {
 	@PostMapping
 	public ResponseEntity<Employee> createEmployee(@Valid @RequestBody CreateEmployeeDto data) {
 		Employee createdEmployee = this.employeeService.createEmployee(data);
-
 		return new ResponseEntity<Employee>(createdEmployee, HttpStatus.CREATED);
 	}
 
 	@GetMapping
 	public ResponseEntity<List<Employee>> findAllEmployees() {
 		List<Employee> employeeList = this.employeeService.findAllEmployees();
-
 		return new ResponseEntity<>(employeeList, HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Employee> findEmployeeById(@PathVariable Long id) {
-		Employee foundEmployee = this.employeeService.findEmployeeById(id)
-				.orElseThrow(() -> new NotFoundException("Could not find post with id: " + id));
-
+		Employee foundEmployee = this.findEmployeeOrThrow(id);
 		return new ResponseEntity<Employee>(foundEmployee, HttpStatus.OK);
 	}
 
 	@PatchMapping("/{id}")
 	public ResponseEntity<Employee> updateByEmployeeId(@PathVariable Long id,
 			@Valid @RequestBody UpdateEmployeeDto data) {
-
-		Employee updatedEmployee = this.employeeService.updateById(id, data)
-				.orElseThrow(() -> new NotFoundException("Could not find post with id: " + id));
-
-		return new ResponseEntity<>(updatedEmployee, HttpStatus.NOT_FOUND);
+		Employee foundEmployee = this.findEmployeeOrThrow(id);
+		Employee updatedEmployee = this.employeeService.updateEmployee(foundEmployee, data);
+		return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Employee> deleteEmployeeById(@PathVariable Long id) {
-		boolean deleted = this.employeeService.deleteEmployeeById(id);
-		if (deleted) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-		throw new NotFoundException("Could not find employee with id: " + id);
+		Employee foundEmployee = this.findEmployeeOrThrow(id);
+		this.employeeService.deleteEmployee(foundEmployee);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
+	private Employee findEmployeeOrThrow(Long id) {
+		return this.employeeService.findEmployeeById(id)
+				.orElseThrow(() -> new NotFoundException("Could not find Employee with id: " + id));
 	}
 }

@@ -32,26 +32,12 @@ public class EmployeeService {
 		return this.employeeRepository.findById(id);
 	}
 
-	public Optional<Employee> updateById(Long id, UpdateEmployeeDto data) {
-		Optional<Employee> maybeEmployee = this.employeeRepository.findById(id);
-		if (maybeEmployee.isEmpty()) {
-			return maybeEmployee;
-		}
-
-		Employee existingEmployee = maybeEmployee.get();
-		mapper.map(data, existingEmployee);
-
-		// Return this optional and run save
-		return Optional.of(this.employeeRepository.save(existingEmployee));
+	public Employee updateEmployee(Employee employee, UpdateEmployeeDto data) {
+		mapper.map(data, employee);
+		return this.employeeRepository.save(employee);
 	}
 
-	public boolean deleteEmployeeById(Long id) {
-		Optional<Employee> maybeEmployee = this.employeeRepository.findById(id);
-		if (maybeEmployee.isEmpty()) {
-			return false;
-		}
-
-		this.employeeRepository.delete(maybeEmployee.get());
-		return true;
+	public void deleteEmployee(Employee employee) {
+		this.employeeRepository.delete(employee);
 	}
 }

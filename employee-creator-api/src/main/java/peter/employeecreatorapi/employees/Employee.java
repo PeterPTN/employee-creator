@@ -56,17 +56,15 @@ public class Employee {
 	@Column(name = "startDate")
 	private LocalDate startDate;
 	
-	@NotNull
 	@Column(name = "endDate")
 	private LocalDate endDate;
 	
 	public Employee() {}
 	
-	public Employee(Long id, String firstName, String middleName, String lastName, String email, String mobile,
+	public Employee(String firstName, String middleName, String lastName, String email, String mobile,
 			String address, String contractType, String jobType, Integer weeklyHours, LocalDate startDate,
 			LocalDate endDate) {
 		super();
-		this.id = id;
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -175,5 +173,4 @@ public class Employee {
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
-//	return this.endDate == null || this.endDate.equals(LocalDate.MAX);
 }

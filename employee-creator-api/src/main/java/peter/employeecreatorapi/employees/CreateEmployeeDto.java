@@ -3,6 +3,7 @@ package peter.employeecreatorapi.employees;
 import java.time.LocalDate;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -39,12 +40,14 @@ public class CreateEmployeeDto {
 	private String jobType;
 	
 	@Min(0)
+	@Max(99)
+	@NotNull
 	private Integer weeklyHours;
 	
 	@Past
 	@NotNull
 	private LocalDate startDate;
-	
+
 	private LocalDate endDate;
 	
 	public String getFirstName() {
@@ -135,4 +138,7 @@ public class CreateEmployeeDto {
 		this.endDate = endDate;
 	}
 
+	public String toString() {
+		return firstName;
+	}
 }

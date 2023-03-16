@@ -3,14 +3,14 @@ package peter.employeecreatorapi.employees.converters;
 import org.modelmapper.Converter;
 import org.modelmapper.spi.MappingContext;
 
+public class StringTrimConverter implements Converter<String, String> {
 
-public class StringTrimConverter implements Converter<String, String>{    
-    @Override 
-    public String convert(MappingContext<String, String> context) {
-        if (context.getSource() == null) {
-            return null;
-        }
+	@Override
+	public String convert(MappingContext<String, String> context) {
+		if (context.getSource() == null) {
+			return null;
+		}
 
-        return context.getSource().trim();
-    }
+		return context.getSource().trim();
+	}
 }
