@@ -18,7 +18,7 @@ import jakarta.validation.Valid;
 import peter.employeecreatorapi.employees.exception.NotFoundException;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/employees")
 public class EmployeesController {
 
 	@Autowired

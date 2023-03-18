@@ -11,15 +11,22 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@reduxjs/toolkit": "^1.9.3",
+    "jest-dom": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.5",
+    "react-query": "^3.39.3",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
     "styled-components": "^5.3.8"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
+    "@types/react-query": "^1.2.9",
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.14",

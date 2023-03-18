@@ -42,13 +42,7 @@ public class EmployeeControllerEndToEndTests {
 	private TestRestTemplate restTemplate;
 
 	@Autowired
-	private EmployeeService employeeService;
-
-	@Autowired
 	private EmployeeRepository employeeRepository;
-
-	@Autowired
-	private ModelMapper mapper;
 
 	private Employee john;
 	private Employee jane;
@@ -81,18 +75,18 @@ public class EmployeeControllerEndToEndTests {
 
 		@Test
 		public void findAllEmployees_returnsAllEmployeesInDb() {
-			ResponseEntity<String> response = restTemplate.getForEntity("/employee", String.class);
+			ResponseEntity<String> response = restTemplate.getForEntity("/employees", String.class);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
-			Employee[] employees = restTemplate.getForObject("/employee", Employee[].class);
+			Employee[] employees = restTemplate.getForObject("/employees", Employee[].class);
 			assertEquals(2, employees.length);
 		}
 
 		@Test
 		public void findAllEmployee_returnsEmptyArrayWhenDbEmpty() {
 			employeeRepository.deleteAll();
-			ResponseEntity<String> response = restTemplate.getForEntity("/employee", String.class);
+			ResponseEntity<String> response = restTemplate.getForEntity("/employees", String.class);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
-			Employee[] employees = restTemplate.getForObject("/employee", Employee[].class);
+			Employee[] employees = restTemplate.getForObject("/employees", Employee[].class);
 			assertEquals(0, employees.length);
 		}
 	}
@@ -113,7 +107,7 @@ public class EmployeeControllerEndToEndTests {
 			String requestBody = "{\"firstName\": \"Josh\", \"middleName\": null, \"lastName\": \"Fox\", \"email\": \"josh.fox@example.com\", \"mobile\": \"0412345678\", \"address\": \"123 Main Street\", \"contractType\": \"Full-Time\", \"jobType\": \"CEO\", \"weeklyHours\": 40, \"startDate\": \"2022-01-01\", \"endDate\": null}";
 			long employeeCount = employeeRepository.count();
 			HttpEntity<String> entity = new HttpEntity<>(requestBody, headers);
-			restTemplate.postForEntity("/employee", entity, String.class);
+			restTemplate.postForEntity("/employees", entity, String.class);
 			assertEquals(employeeCount + 1, employeeRepository.count());
 		}
 
@@ -122,7 +116,7 @@ public class EmployeeControllerEndToEndTests {
 			String requestBody = "{\"firstName\": \"Josh\", \"middleName\": null, \"lastName\": \"Fox\", \"email\": \"josh.fox@example.com\", \"mobile\": \"0412345678\", \"address\": \"123 Main Street\", \"contractType\": \"Full-Time\", \"jobType\": \"CEO\", \"weeklyHours\": 40, \"startDate\": \"2022-01-01\", \"endDate\": null}";
 			Long lastId = employeeRepository.lastUsedId();
 			HttpEntity<String> entity = new HttpEntity<>(requestBody, headers);
-			ResponseEntity<String> response = restTemplate.postForEntity("/employee", entity, String.class);
+			ResponseEntity<String> response = restTemplate.postForEntity("/employees", entity, String.class);
 			assertEquals(HttpStatus.CREATED, response.getStatusCode());
 			String responseBody = response.getBody();
 			System.out.println(responseBody);
@@ -146,7 +140,7 @@ public class EmployeeControllerEndToEndTests {
 			String requestBody = "{\"firstName\": \"\", \"middleName\": null, \"lastName\": \"Fox\", \"email\": \"josh.fox@example.com\", \"mobile\": \"0412345678\", \"address\": \"123 Main Street\", \"contractType\": \"Full-Time\", \"jobType\": \"CEO\", \"weeklyHours\": \"-10\", \"startDate\": \"2022-01-01\", \"endDate\": null}";
 
 			HttpEntity<String> entity = new HttpEntity<>(requestBody, headers);
-			ResponseEntity<String> response = restTemplate.postForEntity("/employee", entity, String.class);
+			ResponseEntity<String> response = restTemplate.postForEntity("/employees", entity, String.class);
 			assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
 
 			JsonNode responseBody = objectMapper.readTree(response.getBody());

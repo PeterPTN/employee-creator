@@ -1,26 +1,22 @@
 import { Outlet } from "react-router-dom"
-import tw, { styled } from 'twin.macro';
+import tw from 'twin.macro';
+import Footer from "./layouts/footer/Footer";
+import Header from "./layouts/header/Header";
 
-const TextComponent = tw.h1`
-  text-3xl 
-  font-bold 
-  underline
-  text-purple-500
+const AppContainer = tw.div`
+  flex
+  flex-col
+  w-[75rem]
+  m-auto
 `
 
 function App() {
   return (
-    <>
-      <div>
-        <TextComponent>Hello World</TextComponent>
-
-        <Outlet />
-
-        <footer>
-          <span>&copy; 2023 <a href="https://pptn-portfolio.netlify.app" target="_blank" rel="noopener noreferrer">Peter Nguyen</a></span>
-        </footer>
-      </div>
-    </>
+    <AppContainer>
+      <Header />
+      <Outlet />
+      <Footer />
+    </AppContainer>
   )
 }
 

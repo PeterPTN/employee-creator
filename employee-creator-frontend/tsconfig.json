@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "types", "types"],
+  "include": ["src", "types", "types", "c:/Users/Peter/Desktop/Test/counterSlice.ts", "c:/Users/Peter/Desktop/Test/Counter.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
