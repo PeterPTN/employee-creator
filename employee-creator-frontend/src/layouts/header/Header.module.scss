@@ -1,0 +1,15 @@
+.Header {
+    display: flex;
+    flex-direction: column;
+}
+
+.Banner {
+    display: flex;
+    justify-content: space-between;
+
+    ul {
+        display: flex;
+        align-items: center;
+        column-gap: .5rem;
+    }
+}

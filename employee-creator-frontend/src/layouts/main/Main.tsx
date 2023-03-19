@@ -1,20 +1,11 @@
 import React from 'react'
-import tw from 'twin.macro'
-
-const MainContainer = tw.main`
-    rounded-sm
-    border-solid
-    border-white
-    border-2
-    px-2
-    py-2
-`
+import styles from "./Main.module.scss"
 
 const Main = ({ children }: {children: any}) => {
     return (
-        <MainContainer>
+        <div className={styles.Main}>
             {children}
-        </MainContainer>
+        </div>
     )
 }
 

@@ -1,0 +1,20 @@
+.Nav {
+    display: flex;
+    column-gap: .5rem;
+
+    li {
+        padding: .25em .5em;
+        background-color: var(--pink);
+        border-radius: 2.5px;
+        transition: all .15s;
+        
+        a {
+            color: white;
+        }
+
+        &:hover {
+            filter: brightness(.95);
+        }
+    }
+
+}
