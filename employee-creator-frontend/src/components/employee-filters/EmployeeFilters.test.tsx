@@ -1,11 +1,15 @@
-import { cleanup, render, screen } from "@testing-library/react"
+import { afterEach, describe, beforeEach, it, expect } from 'vitest';
+import { render, cleanup, screen } from '@testing-library/react'
 import EmployeeFilters from '../employee-filters/EmployeeFilters'
-import '@testing-library/jest-dom'
 
 describe('Employee filters component', () => {
-    beforeEach(() => render(<EmployeeFilters />))
+    beforeEach(() => {
+        render(<EmployeeFilters />)
+    });
 
-    afterEach(() => cleanup());
+    afterEach(() => {
+        cleanup();
+    });
 
     it("should have searchbar", () => {
         const searchbar = screen.getByRole('searchbar-container');
@@ -13,6 +17,7 @@ describe('Employee filters component', () => {
     })
 
     it("should have filter button", () => {
+        screen.debug();
         const filterbutton = screen.getByRole('button');
         expect(filterbutton).toBeInTheDocument();
     })

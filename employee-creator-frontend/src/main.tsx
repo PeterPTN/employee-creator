@@ -1,8 +1,9 @@
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { store } from './store'
-import EmployeePage from './pages/EmployeePage'
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { createBrowserRouter } from 'react-router-dom';
+import { RouterProvider } from 'react-router';
+import { Provider } from 'react-redux';
+import { store } from './store';
+import EmployeePage from './pages/EmployeePage';
 import ReactDOM from 'react-dom/client'
 import React from 'react'
 import App from './App'
@@ -18,14 +19,14 @@ const router = createBrowserRouter([
   }
 ]);
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
-    </QueryClientProvider>
-  </React.StrictMode>,
+  <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  </QueryClientProvider>
+</React.StrictMode>,
 )

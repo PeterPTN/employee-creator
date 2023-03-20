@@ -1,53 +1,53 @@
 :root {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    scroll-behavior: smooth;
-    list-style: none;
-    --pink: #C92C6D;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  scroll-behavior: smooth;
+  list-style: none;
+  --pink: #C92C6D;
 }
 
 .text-center {
-    text-align: center !important;
+  text-align: center !important;
 }
 
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 
 button, a {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* Single line truncate */
 .truncate {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Multi line truncate */
 .multi-truncate {
-    line-height: 2rem;
-    max-height: 4rem;
-    -webkit-box-orient: vertical;
-    display: block;
-    display: -webkit-box;
-    overflow: hidden !important;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 2;
+  line-height: 2rem;
+  max-height: 4rem;
+  -webkit-box-orient: vertical;
+  display: block;
+  display: -webkit-box;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
 }
 
 /* ---- Styles ---- */
 
 body {
-    background-color: #0F0E0E;
-    color: rgb(245,245,245);
+  background-color: #0F0E0E;
+  color: rgb(245,245,245);
 }
