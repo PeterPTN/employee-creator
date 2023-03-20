@@ -28,6 +28,6 @@ const employeeSlice = createSlice({
     }
 })
 
-export const {storeEmployees} = employeeSlice.actions
+export const { storeEmployees } = employeeSlice.actions
 
 export default employeeSlice.reducer

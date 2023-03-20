@@ -17,7 +17,6 @@ describe('Employee filters component', () => {
     })
 
     it("should have filter button", () => {
-        screen.debug();
         const filterbutton = screen.getByRole('button');
         expect(filterbutton).toBeInTheDocument();
     })
