@@ -1,3 +1,5 @@
+import { Employee } from "../lib/Employee";
+
 const getAllEmployees = async () => {
     const response = await Promise.race([
         fetch('http://localhost:8080/employees'),
@@ -24,6 +26,24 @@ const deleteThisEmployee = async (id: number) => {
     return true;
 }
 
-export default deleteThisEmployee
+const createEmployee = async (employeeData: Employee) => {
+    console.log(employeeData)
 
-export {getAllEmployees, deleteThisEmployee}
+    const response = await fetch('http://localhost:8080/employees', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(employeeData),
+    });
+
+    if (!response.ok) {
+      console.log(await response.json());
+      throw new Error('failed to create an employee');
+    }
+
+    return await response.json();
+};
+
+
+export {getAllEmployees, deleteThisEmployee, createEmployee}

@@ -1,9 +1,8 @@
 import EmployeeCard from './EmployeeCard';
 import { beforeEach, describe, it, afterEach } from 'vitest'
-import { cleanup, render, screen } from '@testing-library/react'
+import { cleanup, screen } from '@testing-library/react'
 import { Employee } from '../../lib/Employee';
 import { renderWithProviders } from '../../utils/test-utils';
-
 
 const employee: Employee = {
     id: 1,
@@ -22,7 +21,8 @@ const employee: Employee = {
 describe("Employee Card", () => {
     beforeEach(() => {
         renderWithProviders(
-            <EmployeeCard employee={employee} />)
+            <EmployeeCard employee={employee} />
+        )
     })
 
     afterEach(() => {
