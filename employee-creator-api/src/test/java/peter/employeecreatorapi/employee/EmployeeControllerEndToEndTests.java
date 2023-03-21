@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -31,7 +30,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import peter.employeecreatorapi.TestConfig;
 import peter.employeecreatorapi.employees.Employee;
 import peter.employeecreatorapi.employees.EmployeeRepository;
-import peter.employeecreatorapi.employees.EmployeeService;
 
 @SpringBootTest(properties = "ec-base-url=http://localhost:8080", webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
