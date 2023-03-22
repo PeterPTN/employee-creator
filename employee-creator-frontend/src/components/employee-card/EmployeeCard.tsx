@@ -1,19 +1,23 @@
-import { useMutation } from 'react-query';
+import { deleteEmployee, formatDateToAusStandard } from '../../utils/employee-services';
 import { storeEmployees, setChosenEmployee } from '../../slices/employeeSlice';
 import { useAppDispatch } from '../../utils/redux-hooks';
-import { Employee } from '../../lib/Employee'
-import { deleteEmployee } from '../../utils/employee-services';
+import { ModalContext } from '../../contexts/ModalProvider';
+import { useMutation } from 'react-query';
 import { queryClient } from '../../App';
+import { useContext } from 'react';
+import { Employee } from '../../lib/Employee'
 import styles from './EmployeeCard.module.scss'
 
 interface EmployeCardProps {
     employee: Employee,
-    handleModalState: (arg0: boolean) => void
 }
 
-const EmployeeCard = ({ employee, handleModalState }: EmployeCardProps) => {
+const EmployeeCard = ({ employee }: EmployeCardProps) => {
+    const { setIsModalOpen } = useContext(ModalContext);
     const name = `${employee.firstName} ${employee?.middleName} ${employee.lastName}`;
     const jobStatus = `${employee.contractType} ${employee.jobType}`;
+    const startDate = formatDateToAusStandard(employee.startDate);
+    const endDate = employee.endDate ? formatDateToAusStandard(employee.endDate) : "Ongoing";
     const mutation = useMutation(deleteEmployee);
     const dispatch = useAppDispatch();
 
@@ -28,8 +32,8 @@ const EmployeeCard = ({ employee, handleModalState }: EmployeCardProps) => {
         });
     }
 
-    const handleClickUpdate = (id: number) => {
-        handleModalState(true);
+    const handleClickUpdate = () => {
+        setIsModalOpen(true);
         dispatch(setChosenEmployee(employee));
     }
 
@@ -38,12 +42,12 @@ const EmployeeCard = ({ employee, handleModalState }: EmployeCardProps) => {
             <p role="employee-name">{name}</p>
             <p>{employee.mobile}</p>
             <p>{employee.address}</p>
-            <p>{employee.email}</p>
+            <a href={`mailto:${employee.email}`}>{employee.email}</a>
             <p>{jobStatus}</p>
             <p>{employee.weeklyHours}</p>
-            <p>{employee.startDate}</p>
-            <p>{employee?.endDate ? employee.endDate : "Ongoing"}</p>
-            <button onClick={() => handleClickUpdate(employee.id)}>Update</button>
+            <p>{startDate}</p>
+            <p>{endDate}</p>
+            <button onClick={handleClickUpdate}>Update</button>
             <button onClick={() => handleClickDelete(employee.id)}>Delete</button>
         </div>
     )

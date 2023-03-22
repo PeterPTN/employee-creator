@@ -1,6 +1,6 @@
 import { describe, vi, beforeEach, expect, it } from 'vitest'
 import { Employee } from '../lib/Employee'
-import { getAllEmployees, deleteThisEmployee } from './employee-services'
+import { getAllEmployees, deleteEmployee } from './employee-services'
 
 const mockFetch = vi.fn();
 global.fetch = mockFetch;
@@ -36,7 +36,7 @@ describe("Employee Services", () => {
         middleName: "Thanh",
         lastName: "Nguyen",
         email: "fake@gmail.com",
-        mobile: 5555555555,
+        mobile: "5555555555",
         address: "123 Fake St",
         contractType: "Full-Time",
         jobType: "Developer",

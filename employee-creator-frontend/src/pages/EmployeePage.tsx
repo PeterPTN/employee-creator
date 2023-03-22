@@ -1,18 +1,19 @@
-import { useAppSelector } from '../utils/redux-hooks';
-import { useQuery } from 'react-query';
-import { Employee } from '../lib/Employee';
+import { useContext, useEffect } from 'react';
 import { getAllEmployees } from '../utils/employee-services'
-import EmployeeCard from '../components/employee-card/EmployeeCard';
-import Main from '../layouts/main/Main'
+import { useAppSelector } from '../utils/redux-hooks';
 import { storeEmployees } from "../slices/employeeSlice";
 import { useAppDispatch } from '../utils/redux-hooks';
-import { useEffect, useState } from 'react';
-import EmployeeFilters from '../components/employee-filters/EmployeeFilters';
+import { ModalContext } from '../contexts/ModalProvider';
+import { useQuery } from 'react-query';
+import { Employee } from '../lib/Employee';
 import UpdateEmployeeModal from './UpdateEmployeeModal';
+import EmployeeFilters from '../components/employee-filters/EmployeeFilters';
+import EmployeeCard from '../components/employee-card/EmployeeCard';
+import Main from '../layouts/main/Main'
 
 // Use shared form components
 const EmployeePage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {isModalOpen, setIsModalOpen} = useContext(ModalContext);
 
   const dispatch = useAppDispatch();
   const { data, error, isLoading } = useQuery<Employee[], { message: string }>(["getAllEmployees"], getAllEmployees);
@@ -38,6 +39,24 @@ const EmployeePage = () => {
     if (data) dispatch(storeEmployees(data));
   }, [data])
 
+  useEffect(() => {
+    const clickHandler = (event: any) => {
+      if (event.target.className.includes("Modal")) setIsModalOpen(false);
+    }
+
+    const escapeHandler = (event: any) => {
+      if (isModalOpen && event.key === "Escape") setIsModalOpen(false)
+    }
+
+    document.addEventListener('click', clickHandler);
+    document.addEventListener('keydown', escapeHandler);
+
+    return () => {
+      document.removeEventListener('click', clickHandler)
+      document.addEventListener('keydown', escapeHandler);
+    }
+  }, [isModalOpen])
+
   return (
     <Main>
       {error && <h2>{error.message}</h2>}
@@ -47,12 +66,10 @@ const EmployeePage = () => {
       <EmployeeFilters />
 
       {employees?.map((employee: Employee) => (
-        <EmployeeCard handleModalState={setIsModalOpen} key={employee.id} employee={employee}></EmployeeCard>
+        <EmployeeCard key={employee.id} employee={employee}></EmployeeCard>
       ))}
 
-      {isModalOpen && <UpdateEmployeeModal handleModalState={setIsModalOpen} />}
-      
-      
+      {isModalOpen && <UpdateEmployeeModal />}
     </Main>
   )
 }

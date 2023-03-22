@@ -1,7 +1,7 @@
-import { SubmitHandler } from 'react-hook-form'
-import { useMutation } from 'react-query';
 import { createEmployee } from '../utils/employee-services';
 import { CreateEmployee } from '../lib/CreateEmployee';
+import { SubmitHandler } from 'react-hook-form'
+import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import styles from './CreateEmployeePage.module.scss'
 import Form from '../components/form/Form';
@@ -25,16 +25,11 @@ const CreateEmployeePage = () => {
       startDate: "2022-01-01",
       endDate: ""
     }
-    
-    console.log(data);
-
-    // Validate mobile logic
-    // Email validation maybe
 
     mutation.mutate(data, {
       onSuccess: async () => {
         navigate("/");
-        // Add redux state to notify successful submission
+        // Add redux or context state to notify successful submission
       }
     })
   };

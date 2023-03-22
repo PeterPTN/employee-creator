@@ -1,6 +1,5 @@
 import { CreateEmployee } from "../lib/CreateEmployee";
 import { Employee } from "../lib/Employee";
-import { UpdateEmployee } from "../lib/UpdateEmployee";
 
 const getAllEmployees = async () => {
     const response = await Promise.race([
@@ -38,7 +37,6 @@ const createEmployee = async (employeeData: CreateEmployee) => {
     });
 
     if (!response.ok) {
-      console.log(await response.json());
       throw new Error('failed to create an employee');
     }
 
@@ -69,5 +67,9 @@ const populateFormWithEmployeeData = (setValue: any, employeeData: CreateEmploye
     })
 }
 
+const formatDateToAusStandard = (date: string) => {
+    const [year, month, day] = date.split("-");
+    return `${day}/${month}/${year}`;
+}
 
-export {getAllEmployees, deleteEmployee, createEmployee, updateEmployee, populateFormWithEmployeeData}
+export {getAllEmployees, deleteEmployee, createEmployee, updateEmployee, populateFormWithEmployeeData, formatDateToAusStandard}

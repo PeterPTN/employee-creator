@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { CreateEmployee } from '../../lib/CreateEmployee';
-import { Employee } from '../../lib/Employee';
 import { populateFormWithEmployeeData } from '../../utils/employee-services';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { useContext, useEffect } from 'react';
+import { CreateEmployee } from '../../lib/CreateEmployee';
+import { ModalContext } from '../../contexts/ModalProvider';
+import { Employee } from '../../lib/Employee';
 import styles from './Form.module.scss'
 
 interface FormProps {
@@ -12,6 +13,7 @@ interface FormProps {
 }
 
 const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
+    const { setIsModalOpen } = useContext(ModalContext);
     const additionalFormStyles = formType === "create" ? styles.CreateForm : styles.UpdateForm;
 
     const { setValue, register, handleSubmit, formState: { errors } } = useForm<Employee>();
@@ -27,16 +29,16 @@ const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
     }
 
     useEffect(() => {
-        if (employeeData !== undefined) {
-            populateFormWithEmployeeData(setValue, employeeData)
-        }
+        if (employeeData !== undefined) populateFormWithEmployeeData(setValue, employeeData)
     }, [employeeData])
 
     // Make input + labels into components somehow
-    // Match maxLength to SpringAPI
     // Errors to shake + colored red
+
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={[styles.Form, additionalFormStyles].join(" ")}>
+            {formType === "update" && <button onClick={() => setIsModalOpen(false)}className={styles.CloseButton}>Close</button>}
+
             <label htmlFor="firstName">First Name:*</label>
             <input id="firstName" {...register("firstName", {
                 required: { value: true, message: "First name required" },
@@ -65,9 +67,9 @@ const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
             <label htmlFor="mobile">Mobile:*</label>
             <span>+61<input id="mobile" type="tel" {...register("mobile", {
                 required: { value: true, message: "Mobile required" },
-                pattern: {value: /^\d+$/, message: "Must only contain numbers between 0-9"},
+                pattern: { value: /^\d+$/, message: "Must only contain numbers between 0-9" },
                 maxLength: { value: 10, message: "Can't be over 10 digits" },
-                minLength: {value: 10, message: "Must be a minimum of 10 digits"}
+                minLength: { value: 10, message: "Must be a minimum of 10 digits" }
             })} /></span>
             {errors.mobile && <p>{errors.mobile.message}</p>}
 
