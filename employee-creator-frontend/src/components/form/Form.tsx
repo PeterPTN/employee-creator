@@ -67,7 +67,7 @@ const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
             <label htmlFor="mobile">Mobile:*</label>
             <span>+61<input id="mobile" type="tel" {...register("mobile", {
                 required: { value: true, message: "Mobile required" },
-                pattern: { value: /^\d+$/, message: "Must only contain numbers between 0-9" },
+                pattern: { value: /^04\d*$/, message: "Must start with 04 and include only numbers characters" },
                 maxLength: { value: 10, message: "Can't be over 10 digits" },
                 minLength: { value: 10, message: "Must be a minimum of 10 digits" }
             })} /></span>

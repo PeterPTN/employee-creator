@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { getAllEmployees } from '../utils/employee-services'
 import { useAppSelector } from '../utils/redux-hooks';
-import { storeEmployees } from "../slices/employeeSlice";
+import { sortEmployees, storeEmployees } from "../slices/employeeSlice";
 import { useAppDispatch } from '../utils/redux-hooks';
 import { ModalContext } from '../contexts/ModalProvider';
 import { useQuery } from 'react-query';
@@ -13,27 +13,10 @@ import Main from '../layouts/main/Main'
 
 // Use shared form components
 const EmployeePage = () => {
-  const {isModalOpen, setIsModalOpen} = useContext(ModalContext);
-
   const dispatch = useAppDispatch();
+  const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
   const { data, error, isLoading } = useQuery<Employee[], { message: string }>(["getAllEmployees"], getAllEmployees);
   const employees = useAppSelector(state => state.employees.modifiedSource);
-
-  const mockData: Employee[] = [
-    {
-      id: 1,
-      firstName: 'Peter',
-      middleName: "Thanh",
-      lastName: "Nguyen",
-      email: "fake@gmail.com",
-      mobile: "5555555555",
-      address: "123 Fake St",
-      contractType: "Full-Time",
-      jobType: "Developer",
-      weeklyHours: 40,
-      startDate: "01-01-2023"
-    }
-  ]
 
   useEffect(() => {
     if (data) dispatch(storeEmployees(data));
@@ -53,7 +36,7 @@ const EmployeePage = () => {
 
     return () => {
       document.removeEventListener('click', clickHandler)
-      document.addEventListener('keydown', escapeHandler);
+      document.removeEventListener('keydown', escapeHandler);
     }
   }, [isModalOpen])
 
