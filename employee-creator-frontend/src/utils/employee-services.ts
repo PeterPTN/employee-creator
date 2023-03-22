@@ -1,4 +1,6 @@
+import { CreateEmployee } from "../lib/CreateEmployee";
 import { Employee } from "../lib/Employee";
+import { UpdateEmployee } from "../lib/UpdateEmployee";
 
 const getAllEmployees = async () => {
     const response = await Promise.race([
@@ -14,21 +16,19 @@ const getAllEmployees = async () => {
     return await response.json();
 }
 
-const deleteThisEmployee = async (id: number) => {
+const deleteEmployee = async (id: number) => {
     const response = await fetch(`http://localhost:8080/employees/${id}`, {
         method: 'DELETE'
     });
 
     if (!response.ok) {
-        throw new Error("Couldn't find post with id " + id);
+        throw new Error("Couldn't find employee with id: " + id);
     }
 
     return true;
 }
 
-const createEmployee = async (employeeData: Employee) => {
-    console.log(employeeData)
-
+const createEmployee = async (employeeData: CreateEmployee) => {
     const response = await fetch('http://localhost:8080/employees', {
       method: 'POST',
       headers: {
@@ -42,8 +42,32 @@ const createEmployee = async (employeeData: Employee) => {
       throw new Error('failed to create an employee');
     }
 
-    return await response.json();
+    return true;
 };
 
+const updateEmployee = async (employeeData: Employee) => {
+    const response = await fetch(`http://localhost:8080/employees/${employeeData.id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(employeeData),
+    })
 
-export {getAllEmployees, deleteThisEmployee, createEmployee}
+    if (!response.ok) {
+        throw new Error("Couldn't find employee with id: " + employeeData.id);
+    }
+
+    return true;
+}
+
+const populateFormWithEmployeeData = (setValue: any, employeeData: CreateEmployee) => {
+    const employeeEntries = Object.entries(employeeData);
+    
+    employeeEntries.forEach((entry) => {
+        setValue(entry[0], entry[1]);
+    })
+}
+
+
+export {getAllEmployees, deleteEmployee, createEmployee, updateEmployee, populateFormWithEmployeeData}

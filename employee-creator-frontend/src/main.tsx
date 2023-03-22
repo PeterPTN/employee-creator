@@ -14,15 +14,20 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { index: true, element: <CreateEmployeePage /> },
-    ]
+      { index: true, element: <EmployeePage /> },
+      {
+        path: "/create",
+        element: <CreateEmployeePage />
+      }
+    ],
+
   }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 )

@@ -1,15 +1,20 @@
 import { useMutation } from 'react-query';
-import { storeEmployees } from '../../slices/employeeSlice';
+import { storeEmployees, setChosenEmployee } from '../../slices/employeeSlice';
 import { useAppDispatch } from '../../utils/redux-hooks';
 import { Employee } from '../../lib/Employee'
-import { deleteThisEmployee } from '../../utils/employee-services';
+import { deleteEmployee } from '../../utils/employee-services';
 import { queryClient } from '../../App';
 import styles from './EmployeeCard.module.scss'
 
-const EmployeeCard = ({ employee }: { employee: Employee }) => {
+interface EmployeCardProps {
+    employee: Employee,
+    handleModalState: (arg0: boolean) => void
+}
+
+const EmployeeCard = ({ employee, handleModalState }: EmployeCardProps) => {
     const name = `${employee.firstName} ${employee?.middleName} ${employee.lastName}`;
     const jobStatus = `${employee.contractType} ${employee.jobType}`;
-    const mutation = useMutation(deleteThisEmployee);
+    const mutation = useMutation(deleteEmployee);
     const dispatch = useAppDispatch();
 
     const handleClickDelete = (id: number) => {
@@ -23,6 +28,11 @@ const EmployeeCard = ({ employee }: { employee: Employee }) => {
         });
     }
 
+    const handleClickUpdate = (id: number) => {
+        handleModalState(true);
+        dispatch(setChosenEmployee(employee));
+    }
+
     return (
         <div className={styles.EmployeeCard}>
             <p role="employee-name">{name}</p>
@@ -33,6 +43,7 @@ const EmployeeCard = ({ employee }: { employee: Employee }) => {
             <p>{employee.weeklyHours}</p>
             <p>{employee.startDate}</p>
             <p>{employee?.endDate ? employee.endDate : "Ongoing"}</p>
+            <button onClick={() => handleClickUpdate(employee.id)}>Update</button>
             <button onClick={() => handleClickDelete(employee.id)}>Delete</button>
         </div>
     )

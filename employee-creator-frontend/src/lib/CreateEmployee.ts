@@ -1,5 +1,4 @@
-interface Employee {
-    id: number
+interface CreateEmployee {
     firstName: string
     middleName?: string
     lastName: string
@@ -14,4 +13,4 @@ interface Employee {
     [key: string]: string | number | undefined ;
 }
 
-export type {Employee}
+export type {CreateEmployee}

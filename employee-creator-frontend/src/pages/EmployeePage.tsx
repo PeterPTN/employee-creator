@@ -6,12 +6,14 @@ import EmployeeCard from '../components/employee-card/EmployeeCard';
 import Main from '../layouts/main/Main'
 import { storeEmployees } from "../slices/employeeSlice";
 import { useAppDispatch } from '../utils/redux-hooks';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import EmployeeFilters from '../components/employee-filters/EmployeeFilters';
-
+import UpdateEmployeeModal from './UpdateEmployeeModal';
 
 // Use shared form components
 const EmployeePage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const dispatch = useAppDispatch();
   const { data, error, isLoading } = useQuery<Employee[], { message: string }>(["getAllEmployees"], getAllEmployees);
   const employees = useAppSelector(state => state.employees.modifiedSource);
@@ -23,7 +25,7 @@ const EmployeePage = () => {
       middleName: "Thanh",
       lastName: "Nguyen",
       email: "fake@gmail.com",
-      mobile: 5555555555,
+      mobile: "5555555555",
       address: "123 Fake St",
       contractType: "Full-Time",
       jobType: "Developer",
@@ -44,10 +46,13 @@ const EmployeePage = () => {
 
       <EmployeeFilters />
 
-      {mockData?.map((employee: Employee) => (
-        <EmployeeCard key={employee.id} employee={employee}></EmployeeCard>
+      {employees?.map((employee: Employee) => (
+        <EmployeeCard handleModalState={setIsModalOpen} key={employee.id} employee={employee}></EmployeeCard>
       ))}
 
+      {isModalOpen && <UpdateEmployeeModal handleModalState={setIsModalOpen} />}
+      
+      
     </Main>
   )
 }

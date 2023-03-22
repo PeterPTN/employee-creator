@@ -1,5 +1,6 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Employee } from '../lib/Employee'
+import { CreateEmployee } from '../lib/CreateEmployee'
 
 type SortBy = keyof Employee
 
@@ -7,7 +8,8 @@ const employeeSlice = createSlice({
     name: "employees",
     initialState: {
         originalSource: [] as Employee[],
-        modifiedSource: [] as Employee[]
+        modifiedSource: [] as Employee[],
+        chosenEmployee: {} as Employee
     },
     reducers: {
         storeEmployees(state, action) {
@@ -24,10 +26,13 @@ const employeeSlice = createSlice({
               if (descending) result *= -1;
               return result;
             })
+        },
+        setChosenEmployee(state, action) {
+            state.chosenEmployee = {...action.payload};
         }
     }
 })
 
-export const { storeEmployees } = employeeSlice.actions
+export const { storeEmployees, sortEmployees, setChosenEmployee } = employeeSlice.actions
 
 export default employeeSlice.reducer
