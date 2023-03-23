@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { getAllEmployees } from '../utils/employee-services'
 import { useAppSelector } from '../utils/redux-hooks';
-import { sortEmployees, storeEmployees } from "../slices/employeeSlice";
+import { storeEmployees } from "../slices/employeeSlice";
 import { useAppDispatch } from '../utils/redux-hooks';
 import { ModalContext } from '../contexts/ModalProvider';
 import { useQuery } from 'react-query';

@@ -40,15 +40,15 @@ const EmployeeCard = ({ employee }: EmployeCardProps) => {
     return (
         <div className={styles.EmployeeCard}>
             <p role="employee-name">{name}</p>
-            <p>{employee.mobile}</p>
-            <p>{employee.address}</p>
-            <a href={`mailto:${employee.email}`}>{employee.email}</a>
-            <p>{jobStatus}</p>
-            <p>{employee.weeklyHours}</p>
-            <p>{startDate}</p>
-            <p>{endDate}</p>
-            <button onClick={handleClickUpdate}>Update</button>
-            <button onClick={() => handleClickDelete(employee.id)}>Delete</button>
+            <p role="employee-mobile">{employee.mobile}</p>
+            <p role="employee-address">{employee.address}</p>
+            <a role="employee-email" href={`mailto:${employee.email}`}>{employee.email}</a>
+            <p role="employee-jobstatus" >{jobStatus}</p>
+            <p role="employee-weeklyhours" >{employee.weeklyHours}</p>
+            <p role="employee-startdate">{startDate}</p>
+            <p role="employee-enddate" >{endDate}</p>
+            <button role="update-button" onClick={handleClickUpdate}>Update</button>
+            <button role="delete-button" onClick={() => handleClickDelete(employee.id)}>Delete</button>
         </div>
     )
 }

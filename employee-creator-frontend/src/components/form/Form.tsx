@@ -36,8 +36,8 @@ const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
     // Errors to shake + colored red
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className={[styles.Form, additionalFormStyles].join(" ")}>
-            {formType === "update" && <button onClick={() => setIsModalOpen(false)}className={styles.CloseButton}>Close</button>}
+        <form role="form" onSubmit={handleSubmit(onSubmit)} className={[styles.Form, additionalFormStyles].join(" ")}>
+            {formType === "update" && <button role="close-button" onClick={() => setIsModalOpen(false)}className={styles.CloseButton}>Close</button>}
 
             <label htmlFor="firstName">First Name:*</label>
             <input id="firstName" {...register("firstName", {

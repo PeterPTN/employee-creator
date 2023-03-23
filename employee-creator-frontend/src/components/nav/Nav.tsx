@@ -5,8 +5,8 @@ const Nav = () => {
     return (
         <div>
             <ul className={styles.Nav}>
-                <li><Link to="/">View All</Link></li>
-                <li><Link to="/create">Add</Link></li>
+                <li><Link role="view-link" to="/">View All</Link></li>
+                <li><Link role="add-link" to="/create">Add</Link></li>
             </ul>
         </div>
     )

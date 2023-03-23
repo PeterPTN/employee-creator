@@ -50,7 +50,7 @@ const updateEmployee = async (employeeData: Employee) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(employeeData),
-    })
+    });
 
     if (!response.ok) {
         throw new Error("Couldn't find employee with id: " + employeeData.id);

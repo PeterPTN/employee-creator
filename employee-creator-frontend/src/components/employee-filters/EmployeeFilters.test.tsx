@@ -1,10 +1,12 @@
-import { afterEach, describe, beforeEach, it, expect } from 'vitest';
-import { render, cleanup, screen } from '@testing-library/react'
+import { afterEach, describe, beforeEach, it, expect, vi } from 'vitest';
+import { cleanup, fireEvent, screen } from '@testing-library/react'
+import { renderWithProviders } from '../../utils/test-utils';
 import EmployeeFilters from '../employee-filters/EmployeeFilters'
 
-describe('Employee filters component', () => {
+// Must haves
+describe('Employee Filters Component', () => {
     beforeEach(() => {
-        render(<EmployeeFilters />)
+        renderWithProviders(<EmployeeFilters />)
     });
 
     afterEach(() => {
@@ -12,12 +14,46 @@ describe('Employee filters component', () => {
     });
 
     it("should have searchbar", () => {
-        const searchbar = screen.getByRole('searchbar-container');
+        const searchbar = screen.getByPlaceholderText("Search by...");
         expect(searchbar).toBeInTheDocument();
     })
 
-    it("should have filter button", () => {
-        const filterbutton = screen.getByRole('button');
+    it("should have search filter button", () => {
+        const filterbutton = screen.getByRole('search-filter-button');
         expect(filterbutton).toBeInTheDocument();
     })
+
+    it("should have sort button", () => {
+        const sortbutton = screen.getByRole('sort-button');
+        expect(sortbutton).toBeInTheDocument();
+    })
+
+    it('should call handleEmployeeSearch on input change', () => {
+        const input = screen.getByPlaceholderText("Search by...") as HTMLInputElement;
+        const inputValue = 'test';
+        const handleEmployeeSearch = vi.fn();
+
+        input.addEventListener('input', () => handleEmployeeSearch(inputValue));
+        input.value = inputValue;
+        fireEvent.input(input);
+        expect(handleEmployeeSearch).toHaveBeenCalledWith(inputValue);
+      });
+
+      it('should call handleSetSearchType on button click', () => {
+        const filterButton = screen.getByRole('search-filter-button');
+        const handleSetSearchType = vi.fn();
+
+        filterButton.addEventListener('click', handleSetSearchType);
+        fireEvent.click(filterButton);
+        expect(handleSetSearchType).toHaveBeenCalled();
+      });
+
+      it('should call handleSetSearchType on button click', () => {
+        const sortButton = screen.getByRole('sort-button');
+        const handleSetSearchType = vi.fn();
+
+        sortButton.addEventListener('click', handleSetSearchType);
+        fireEvent.click(sortButton);
+        expect(handleSetSearchType).toHaveBeenCalled();
+      });
 })

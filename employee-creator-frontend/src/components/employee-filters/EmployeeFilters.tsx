@@ -28,21 +28,19 @@ const EmployeeFilters = () => {
 
     return (
         <>
-            <div className={styles.EmployeeFilters} role="searchbar-container">
+            <div className={styles.EmployeeFilters}>
                 <div className={styles.SearchBarContainer}>
                     <form>
                         <input onChange={handleEmployeeSearch} type="text" placeholder='Search by...' />
                     </form>
 
-                    <button onClick={handleSetSearchType}>{searchType === "firstName" ? 'Full name' : searchType}</button>
+                    <button role="search-filter-button" onClick={handleSetSearchType}>{searchType === "firstName" ? 'Full name' : searchType}</button>
                 </div>
-
-                {/* Create modal or carousel for filter list -- call sortEmployees */}
             </div>
 
             <div>
                 <h3>Sort by</h3>
-                <button onClick={handleDescendingOrder}>name {descendingOrder ? `↓` : `↑`}</button>
+                <button role="sort-button" onClick={handleDescendingOrder}>name {descendingOrder ? `↓` : `↑`}</button>
             </div>
         </>
     )
