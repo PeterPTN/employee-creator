@@ -28,7 +28,7 @@ const employeeSlice = createSlice({
             })
         },
         setEmployeeSearchType(state, action) {
-            state.searchType = action.payload.toLowerCase();
+            state.searchType = action.payload;
         },
         searchEmployeeBy(state, action) {
         const searchValue = action.payload;
@@ -36,7 +36,8 @@ const employeeSlice = createSlice({
             let filterSource;
             if (state.searchType === "firstName") filterSource = `${employee[state.searchType]} ${employee.lastName}`.toLowerCase();
             else filterSource = `${employee[state.searchType]}`.toLowerCase();
-
+            console.log(state.searchType);
+            console.log(filterSource)
             return filterSource.includes(searchValue);
         });
         },

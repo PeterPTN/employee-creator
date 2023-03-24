@@ -17,7 +17,7 @@ const EmployeeFilters = () => {
 
     const handleEmployeeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(searchEmployeeBy(event.target.value));
-    } 
+    }
 
     const handleSetSearchType = () => {
         const currentIndex = searchTypeArray.indexOf(searchType);
@@ -29,18 +29,19 @@ const EmployeeFilters = () => {
     return (
         <>
             <div className={styles.EmployeeFilters}>
-                <div className={styles.SearchBarContainer}>
-                    <form>
-                        <input onChange={handleEmployeeSearch} type="text" placeholder='Search by...' />
-                    </form>
+                <h3>Filter by</h3>
 
-                    <button role="search-filter-button" onClick={handleSetSearchType}>{searchType === "firstName" ? 'Full name' : searchType}</button>
+                <div className={styles.FilterContainer}>
+                    <button role="sort-button" onClick={handleDescendingOrder}>name {descendingOrder ? `↓` : `↑`}</button>
+
+                    <div className={styles.SearchBarContainer}>
+                        <form>
+                            <input onChange={handleEmployeeSearch} type="text" placeholder='Search by...' />
+                        </form>
+
+                        <button role="search-filter-button" onClick={handleSetSearchType}> 	&#8594; {searchType === "firstName" ? 'Full name' : searchType}</button>
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <h3>Sort by</h3>
-                <button role="sort-button" onClick={handleDescendingOrder}>name {descendingOrder ? `↓` : `↑`}</button>
             </div>
         </>
     )

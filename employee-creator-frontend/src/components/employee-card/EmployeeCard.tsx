@@ -15,7 +15,7 @@ interface EmployeCardProps {
 const EmployeeCard = ({ employee }: EmployeCardProps) => {
     const { setIsModalOpen } = useContext(ModalContext);
     const name = `${employee.firstName} ${employee?.middleName} ${employee.lastName}`;
-    const jobStatus = `${employee.contractType} ${employee.jobType}`;
+    const jobStatus = `${employee.contractType} - ${employee.jobType}`;
     const startDate = formatDateToAusStandard(employee.startDate);
     const endDate = employee.endDate ? formatDateToAusStandard(employee.endDate) : "Ongoing";
     const mutation = useMutation(deleteEmployee);
@@ -39,16 +39,30 @@ const EmployeeCard = ({ employee }: EmployeCardProps) => {
 
     return (
         <div className={styles.EmployeeCard}>
-            <p role="employee-name">{name}</p>
-            <p role="employee-mobile">{employee.mobile}</p>
-            <p role="employee-address">{employee.address}</p>
-            <a role="employee-email" href={`mailto:${employee.email}`}>{employee.email}</a>
-            <p role="employee-jobstatus" >{jobStatus}</p>
-            <p role="employee-weeklyhours" >{employee.weeklyHours}</p>
-            <p role="employee-startdate">{startDate}</p>
-            <p role="employee-enddate" >{endDate}</p>
-            <button role="update-button" onClick={handleClickUpdate}>Update</button>
-            <button role="delete-button" onClick={() => handleClickDelete(employee.id)}>Delete</button>
+            <div className={styles.EmployeeLeftColumn}>
+                <div style={{ display: "flex" }}>
+                    <h4 role="employee-name">{name}</h4>
+                </div>
+
+                <div className={styles.EmployeeInfo}>
+                    <div className={styles.PersonalDetails} >
+                        <span>Mobile:<p role="employee-mobile">{employee.mobile}</p></span>
+                        <span>Address:<p role="employee-address">{employee.address}</p></span>
+                        <span>Email:<a role="employee-email" href={`mailto:${employee.email}`}>{employee.email}</a></span>
+                    </div>
+
+                    <div className={styles.JobDetails}>
+                        <span>Job Status:<p role="employee-jobstatus" >{jobStatus}</p></span>
+                        <span>Weekly Hours:<p role="employee-weeklyhours">{employee.weeklyHours}</p></span>
+                        <span>Employment:<p role="employee-employmentdates">{startDate} - {endDate}</p></span>
+                    </div>
+                </div>
+            </div>
+
+            <div className={styles.EmployeeButton}>
+                <button role="update-button" onClick={handleClickUpdate}>Update</button>
+                <button role="delete-button" onClick={() => handleClickDelete(employee.id)}>Delete</button>
+            </div>
         </div>
     )
 }

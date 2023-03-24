@@ -1,8 +1,83 @@
 .EmployeeCard {
     display: flex;
-    column-gap: 1rem;
+    justify-content: space-between;
+    border: 1px solid rgb(55, 55, 55);
+    border-radius: 2px;
+    padding: 2rem 1.5rem;
+    border-bottom: none;
+    background-color: var(--greybackground);
 
+    h4 {
+        font-size: 1.5rem;
+        padding: 0px 5px 5px 5px;
+        border-bottom: 1px solid rgb(55, 55, 55);
+        margin-bottom: 1rem;
+        filter: brightness(1.2);
+    }
+
+    span {
+        display: flex;
+
+        * {
+            padding-left: 3px;
+        }
+    }
+
+    a,
     p {
-        flex: 1;
+        color: rgb(170, 170, 170);
+    }
+
+    a {
+        text-decoration: underline;
+
+        &:hover {
+            filter: brightness(1.2);
+        }
+    }
+
+    &:last-child {
+        border-bottom: 1px solid rgb(55, 55, 55);
+    }
+}
+
+.EmployeeLeftColumn {
+    width: 40%;
+}
+
+.EmployeeInfo {
+    display: flex;
+}
+
+.PersonalDetails,
+.JobDetails {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    flex: 1;
+}
+
+.EmployeeButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: .5rem;
+
+    button {
+        aspect-ratio: 1/1;
+        padding: .5em;
+        border-radius: 2px;
+        border: none;
+
+        &:hover {
+            filter: brightness(.9);
+        }
+    }
+
+    button:nth-child(1) {}
+
+    button:nth-child(2) {
+        background-color: rgb(88, 17, 32);
+        color: rgb(220, 220, 220);
     }
 }

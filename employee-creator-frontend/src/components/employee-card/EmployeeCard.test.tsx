@@ -38,8 +38,7 @@ describe("Employee Card", () => {
         const employeeEmail = screen.getByRole("employee-email");
         const employeeJobStatus = screen.getByRole("employee-jobstatus");
         const employeeWeeklyHours = screen.getByRole("employee-weeklyhours");
-        const employeeStartDate = screen.getByRole("employee-startdate");
-        const employeeEndDate = screen.getByRole("employee-enddate");
+        const employeeDates = screen.getByRole("employee-employeeStartDate");
 
         expect(employeeName).toHaveTextContent(
             `${employee.firstName} ${employee.middleName} ${employee.lastName}`
@@ -49,8 +48,7 @@ describe("Employee Card", () => {
         expect(employeeEmail).toHaveTextContent(employee.email);
         expect(employeeJobStatus).toHaveTextContent(employee.jobType);
         expect(employeeWeeklyHours).toHaveTextContent(`${employee.weeklyHours}`);
-        expect(employeeStartDate).toHaveTextContent(formatDateToAusStandard(employee.startDate));
-        expect(employeeEndDate).toHaveTextContent("Ongoing");
+        expect(employeeDates).toHaveTextContent(formatDateToAusStandard(employee.startDate)+ " - Ongoing");
     });
 
     it("should have a delete button", () => {
