@@ -2,25 +2,123 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
     row-gap: .5rem;
     padding: 2rem;
+
+    input[type="submit"] {
+        margin: 1rem auto 0rem;
+        width: fit-content;
+        background-color: rgb(30, 30, 30);
+        border: none;
+        color: var(--silver);
+        border-radius: 2px;
+        padding: .25rem .5rem;
+        font-size: 1rem;
+        cursor: pointer;
+
+        &:hover {
+            filter: brightness(.9);
+        }
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+        accent-color: var(--pink);
+        margin-left: 5px;
+    }
+
+    input[type="date"] {
+        width: fit-content;
+    }
+}
+
+.FormData {
+    display: flex;
+    column-gap: 5rem;
+
+    p {
+        color: rgb(250, 56, 56);
+    }
+
+    p,
+    input {
+        margin-bottom: 10px;
+    }
+
+    input {
+        background-color: var(--greybackground);
+        border: 1px solid rgb(55, 55, 55);
+        color: var(--silver);
+        padding: 2.5px 5px;
+
+        &::placeholder {
+            color: var(--silver);
+        }
+
+        &:focus {
+            outline: 1px solid var(--silver);
+        }
+    }
+
+    label {
+        margin-bottom: 5px;
+    }
+
+    h4 {
+        width: fit-content;
+        font-size: 1rem;
+        padding: 0px 2px 2px;
+        margin-bottom: 5px;
+    }
+}
+
+.Mobile {
+    color: var(--pink);
+}
+
+.FormColumn {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.RadioContainer {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1rem;
+
+    label {
+        filter: brightness(.7);
+    }
 }
 
 .CreateForm {
-  
+    background-color: var(--greybackground);
+    border: 1px solid rgb(55, 55, 55);
 }
 
 .UpdateForm {
     margin: auto;
     width: 1050px;
-    background-color: rgb(73, 58, 58);
+    background-color: var(--greybackground);
+    padding: 6rem 2rem 4rem;
+    margin-top: 5rem;
+    border: 1px solid rgb(55, 55, 55);
 }
 
 .CloseButton {
     position: absolute;
-    left: 1rem;
-    top: 1rem;
+    left: 2rem;
+    top: 2rem;
+    border: none;
+    border-radius: 2px;
+    background-color: rgb(30, 30, 30);
+    color: white;
+    padding: .25rem .5rem;
+    border: 1px solid var(--pink);
+
+    &:hover {
+        filter: brightness(.9);
+    }
 }
 
 // Customise inputs further

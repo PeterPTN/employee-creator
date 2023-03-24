@@ -38,7 +38,7 @@ describe("Employee Card", () => {
         const employeeEmail = screen.getByRole("employee-email");
         const employeeJobStatus = screen.getByRole("employee-jobstatus");
         const employeeWeeklyHours = screen.getByRole("employee-weeklyhours");
-        const employeeDates = screen.getByRole("employee-employeeStartDate");
+        const employeeDates = screen.getByRole("employee-employmentdates");
 
         expect(employeeName).toHaveTextContent(
             `${employee.firstName} ${employee.middleName} ${employee.lastName}`

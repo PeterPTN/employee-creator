@@ -6,10 +6,9 @@ import { useAppDispatch } from '../utils/redux-hooks';
 import { ModalContext } from '../contexts/ModalProvider';
 import { useQuery } from 'react-query';
 import { Employee } from '../lib/Employee';
-import UpdateEmployeeModal from './UpdateEmployeeModal';
+import UpdateEmployeeModal from '../components/update-modal/UpdateEmployeeModal';
 import EmployeeFilters from '../components/employee-filters/EmployeeFilters';
 import EmployeeCard from '../components/employee-card/EmployeeCard';
-import Main from '../layouts/main/Main'
 
 // Use shared form components
 const EmployeePage = () => {
@@ -41,7 +40,7 @@ const EmployeePage = () => {
   }, [isModalOpen])
 
   return (
-    <Main>
+    <div>
       {error && <h2>{error.message}</h2>}
 
       {isLoading && <h2>Loading...</h2>}
@@ -53,7 +52,7 @@ const EmployeePage = () => {
       ))}
 
       {isModalOpen && <UpdateEmployeeModal />}
-    </Main>
+    </div>
   )
 }
 

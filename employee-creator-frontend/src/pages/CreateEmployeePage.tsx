@@ -1,33 +1,22 @@
+import { RouteHighlighterContext } from '../contexts/RouteHighlighterProvider';
 import { createEmployee } from '../utils/employee-services';
 import { CreateEmployee } from '../lib/CreateEmployee';
 import { SubmitHandler } from 'react-hook-form'
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import styles from './CreateEmployeePage.module.scss'
+import { useContext } from 'react';
 import Form from '../components/form/Form';
-import Main from '../layouts/main/Main'
 
 const CreateEmployeePage = () => {
   const mutation = useMutation(createEmployee);
+  const { setAtCurrentNav } = useContext(RouteHighlighterContext);
+
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<CreateEmployee> = data => {
-    const testDate: CreateEmployee = {
-      firstName: "Betty",
-      middleName: "",
-      lastName: "Fox",
-      email: "Betty.fox@example.com",
-      mobile: "0412345678",
-      address: "123 Main Street",
-      contractType: "Contract",
-      jobType: "Full-Time",
-      weeklyHours: 40,
-      startDate: "2022-01-01",
-      endDate: ""
-    }
-
     mutation.mutate(data, {
       onSuccess: async () => {
+        setAtCurrentNav("")
         navigate("/");
         // Add redux or context state to notify successful submission
       }
@@ -35,9 +24,9 @@ const CreateEmployeePage = () => {
   };
 
   return (
-    <Main>
+    <div>
       <Form formType="create" onSubmit={onSubmit} />
-    </Main>
+    </div>
   )
 }
 
