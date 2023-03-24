@@ -1,0 +1,13 @@
+.App {
+  max-width: 1400px;
+  margin: 0rem auto;
+  position: relative;
+
+  @media screen and (max-width: 1450px){
+    margin: 0 2rem;
+  }
+
+  @media screen and (max-width: 750px){
+    margin: 0 1rem;
+  }
+}

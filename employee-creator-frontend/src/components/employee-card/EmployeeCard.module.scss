@@ -7,6 +7,10 @@
     border-bottom: none;
     background-color: var(--greybackground);
 
+    @media screen and (max-width: 450px) {
+        flex-direction: column;
+    }
+
     h4 {
         font-size: 1.5rem;
         padding: 0px 5px 5px 5px;
@@ -42,11 +46,24 @@
 }
 
 .EmployeeLeftColumn {
-    width: 40%;
+    width: 35rem;
+
+    @media screen and (max-width: 450px) {
+        width: auto;
+    }
 }
 
 .EmployeeInfo {
     display: flex;
+
+    @media screen and (max-width: 750px) {
+        flex-direction: column;
+        row-gap: 10px;
+    }
+
+    @media screen and (max-width: 450px) {
+        margin-bottom: .5rem;
+    }
 }
 
 .PersonalDetails,
@@ -68,6 +85,10 @@
         padding: .5em;
         border-radius: 2px;
         border: none;
+
+        @media screen and (max-width: 450px) {
+            aspect-ratio: initial;
+        }
 
         &:hover {
             filter: brightness(.9);

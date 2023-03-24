@@ -6,14 +6,19 @@
     h1 {
         color: var(--pink);
         font-size: 6rem;
+
+        @media screen and (max-width: 750px) {
+            font-size: 11vw;
+        }
     }
 
     h2 {
         margin: 0rem 0rem 1rem;
-        filter: brightness(.95);
+
+        @media screen and (max-width: 750px) {
+            text-align: center;
+        }
     }
-
-
 
     li {
         cursor: pointer;
@@ -29,6 +34,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media screen and (max-width: 750px) {
+        row-gap: .5rem;
+        flex-direction: column;
+        margin-bottom: .5rem;
+    }
 
     ul {
         display: flex;

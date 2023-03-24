@@ -21,7 +21,8 @@
         }
     }
 
-    input[type="checkbox"], input[type="radio"] {
+    input[type="checkbox"],
+    input[type="radio"] {
         accent-color: var(--pink);
         margin-left: 5px;
     }
@@ -34,6 +35,10 @@
 .FormData {
     display: flex;
     column-gap: 5rem;
+
+    @media screen and (max-width: 750px) {
+        flex-direction: column;
+    }
 
     p {
         color: rgb(250, 56, 56);
@@ -103,6 +108,11 @@
     padding: 6rem 2rem 4rem;
     margin-top: 5rem;
     border: 1px solid rgb(55, 55, 55);
+
+    @media screen and (max-width: 750px) {
+        width: auto;
+        margin: 1rem
+    }
 }
 
 .CloseButton {
@@ -118,6 +128,12 @@
 
     &:hover {
         filter: brightness(.9);
+    }
+
+    @media screen and (max-width: 750px) {
+        left: 0;
+        right: 0;
+        margin: auto;
     }
 }
 
