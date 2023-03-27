@@ -56,6 +56,11 @@ describe("Employee Card", () => {
         expect(deleteButton).toBeInTheDocument();
     });
 
+    it("should have an update button", () => {
+        const updateButton = screen.getByRole("update-button");
+        expect(updateButton).toBeInTheDocument();
+    });
+
     it("should call handleClickDelete on user click", async () => {
         const deleteButton = screen.getByRole("delete-button");
         expect(deleteButton).toBeInTheDocument();

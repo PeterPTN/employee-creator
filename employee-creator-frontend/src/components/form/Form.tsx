@@ -56,7 +56,7 @@ const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
                     <label htmlFor="firstName">First Name:*</label>
                     <input id="firstName" {...register("firstName", {
                         required: { value: true, message: "First name required" },
-                        maxLength: { value: 50, message: "Can't be over 50 characters" }
+                        maxLength: { value: 50, message: "First name can't be over 50 characters" }
                     })} />
                     {errors.firstName && <p>{errors.firstName.message}</p>}
 
@@ -66,14 +66,14 @@ const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
                     <label htmlFor="lastName">Last Name:*</label>
                     <input id="lastName" {...register("lastName", {
                         required: { value: true, message: "Last name required" },
-                        maxLength: { value: 50, message: "Can't be over 50 characters" }
+                        maxLength: { value: 50, message: "Last name can't be over 50 characters" }
                     })} />
                     {errors.lastName && <p>{errors.lastName.message}</p>}
 
                     <label htmlFor="email">Email:*</label>
                     <input id="email" {...register("email", {
                         required: { value: true, message: "Email required" },
-                        maxLength: { value: 75, message: "Can't be over 75 characters" }
+                        maxLength: { value: 75, message: "Email can't be over 75 characters" }
 
                     })} />
                     {errors.email && <p>{errors.email.message}</p>}
@@ -82,7 +82,7 @@ const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
                     <span className={styles.Mobile}>+61 <input id="mobile" type="tel" {...register("mobile", {
                         required: { value: true, message: "Mobile required" },
                         pattern: { value: /^04\d*$/, message: "Must start with 04 and include only numbers characters" },
-                        maxLength: { value: 10, message: "Can't be over 10 digits" },
+                        maxLength: { value: 10, message: "Mobile can't be over 10 digits" },
                         minLength: { value: 10, message: "Must be a minimum of 10 digits" }
                     })} /></span>
                     {errors.mobile && <p>{errors.mobile.message}</p>}
@@ -90,7 +90,7 @@ const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
                     <label htmlFor="address">Address:*</label>
                     <input id="address" {...register("address", {
                         required: { value: true, message: "Address required" },
-                        maxLength: { value: 75, message: "Can't be over 75 characters" }
+                        maxLength: { value: 75, message: "Address can't be over 75 characters" }
                     })} />
                     {errors.address && <p>{errors.address.message}</p>}
                 </div>
@@ -99,7 +99,7 @@ const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
                     <label htmlFor="weeklyHours">Weekly Hours:*</label>
                     <input id="weeklyHours" {...register("weeklyHours", {
                         required: { value: true, message: "Please enter a number" },
-                        maxLength: { value: 2, message: "Number cannot be greater than 99" },
+                        maxLength: { value: 2, message: "Hours cannot be greater than 99" },
                     })} />
                     {errors.weeklyHours && <p>{errors.weeklyHours.message}</p>}
 
@@ -161,7 +161,7 @@ const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
                 </div>
             </div>
 
-            <input type="submit" value="Submit" />
+            <input role="submit" type="submit" value="Submit" />
         </form>
     )
 }
