@@ -60,7 +60,7 @@ describe('Form Component', () => {
         expect(screen.getByLabelText("End Date:")).toHaveValue(employee.endDate);
     });
 
-    it('should change form fields values with user inputs', () => {
+    it('should allow submission of form fields values from user inputs', () => {
         const firstNameInput = screen.getByLabelText("First Name:*");
         const middleNameInput = screen.getByLabelText("Middle Name:");
         const lastNameInput = screen.getByLabelText("Last Name:*");
@@ -98,7 +98,7 @@ describe('Form Component', () => {
         expect(endDateInput).toHaveValue("2000-01-01");
     });
 
-    it("should render errors when form is submitted with empty inputs", async () => {
+    it("should render required errors when form is submitted with empty inputs", async () => {
         const submitButton = screen.getByRole("submit");
         const firstNameInput = screen.getByLabelText("First Name:*");
         const lastNameInput = screen.getByLabelText("Last Name:*");
@@ -152,7 +152,7 @@ describe('Form Component', () => {
         expect(startDateErrorMessage).toBeInTheDocument();
     })
 
-    it("should render errors when form is submitted with invalid inputs", async () => {
+    it("should render appropriate errors when form is submitted with invalid inputs", async () => {
         const submitButton = screen.getByRole("submit");
         const firstNameInput = screen.getByLabelText("First Name:*");
         const lastNameInput = screen.getByLabelText("Last Name:*");
