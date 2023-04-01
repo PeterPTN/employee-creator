@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
 
+env:
+  SPRING_DATASOURCE_DEV_URL: jdbc:mysql://localhost:3306/employee_creator
+  SPRING_DATASOURCE_DEV_USERNAME: root
+  SPRING_DATASOURCE_DEV_PASSWORD: helloworld1
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
