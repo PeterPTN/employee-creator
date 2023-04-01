@@ -13,9 +13,7 @@ jobs:
         image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: helloworld1
-          MYSQL_DATABASE: employee_creator
-          MYSQL_USER: root
-          MYSQL_PASSWORD: helloworld1
+          MYSQL_DATABASE: employee-creator
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
