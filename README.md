@@ -1,6 +1,7 @@
 # Employee Creator
 
-![React Tests Workflow](https://github.com/peterPTN/employee-creator/actions/workflows/main.yml/badge.svg)
+![React Tests Workflow](https://github.com/peterPTN/employee-creator/actions/workflows/react.yml/badge.svg)
+![SpringBoot Tests Workflow](https://github.com/peterPTN/employee-creator/actions/workflows/springboot.yml/badge.svg)
 
 ## Application Snippets
 
