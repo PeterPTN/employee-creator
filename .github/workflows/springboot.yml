@@ -13,6 +13,9 @@ jobs:
         image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: helloworld1
+          MYSQL_DATABASE: employee_creator
+          MYSQL_USER: root
+          MYSQL_PASSWORD: helloworld1
           SPRING_DATASOURCE_DEV_URL: jdbc:mysql://localhost:3306/employee_creator
           SPRING_DATASOURCE_DEV_USERNAME: root
           SPRING_DATASOURCE_DEV_PASSWORD: helloworld1
