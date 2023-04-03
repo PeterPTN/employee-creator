@@ -33,21 +33,7 @@ const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
         dispatch(setIsModalOpen(true));
     }
 
-    useForm({
-        defaultValues: {
-            firstName: employeeData?.firstName,
-            middleName: employeeData?.middleName,
-            lastName: employeeData?.lastName,
-            email: employeeData?.email,
-            startDate: employeeData?.startDate,
-            mobile: employeeData?.mobile,
-            address: employeeData?.address,
-            contractType: employeeData?.contractType,
-            jobType: employeeData?.jobType,
-            weeklyHours: employeeData?.weeklyHours,
-            endDate: employeeData?.endDate,
-        }
-    })
+    useForm({ defaultValues: { employeeData } })
 
     useEffect(() => {
         if (employeeData !== undefined) reset(employeeData);
