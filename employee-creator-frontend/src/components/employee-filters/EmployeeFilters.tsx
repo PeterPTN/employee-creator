@@ -1,6 +1,6 @@
-import { searchEmployeeBy, setEmployeeSearchType } from '../../slices/employeeSlice';
+import { searchEmployeeBy, setEmployeeSearchType } from '../../slices/employee-slice/employeeSlice';
 import { useAppDispatch } from '../../utils/redux-hooks';
-import { sortEmployees } from '../../slices/employeeSlice';
+import { sortEmployees } from '../../slices/employee-slice/employeeSlice';
 import { useState } from 'react';
 import styles from './EmployeeFilters.module.scss'
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Employee } from '../lib/Employee'
+import { Employee } from '../../lib/Employee'
 
 type SortBy = keyof Employee
 
@@ -15,37 +15,36 @@ const employeeSlice = createSlice({
         storeEmployees(state, action) {
             // Must be mutated, don't create new 
             state.originalSource.splice(0, state.originalSource.length, ...action.payload)
-            state.modifiedSource = state.originalSource.sort((a,b) => a.firstName > b.firstName ? 1 : a.firstName < b.firstName ? -1 : 0);
+            state.modifiedSource = state.originalSource.sort((a, b) => a.firstName > b.firstName ? 1 : a.firstName < b.firstName ? -1 : 0);
         },
         sortEmployees(state, action: PayloadAction<{ sortBy: SortBy; descending: boolean }>) {
             const { sortBy, descending } = action.payload;
             if (!sortBy) return;
 
-            state.modifiedSource.sort((a, b) => {    
-              let result = a[sortBy]! < b![sortBy]! ? -1 : a[sortBy]! > b[sortBy]! ? 1 : 0;
-              if (descending) result *= -1;
-              return result;
+            state.modifiedSource.sort((a, b) => {
+                let result = a[sortBy]! < b![sortBy]! ? -1 : a[sortBy]! > b[sortBy]! ? 1 : 0;
+                if (descending) result *= -1;
+                return result;
             })
         },
         setEmployeeSearchType(state, action) {
             state.searchType = action.payload;
         },
         searchEmployeeBy(state, action) {
-        const searchValue = action.payload;
-        state.modifiedSource = state.originalSource.filter((employee) => {
-            let filterSource;
-            if (state.searchType === "firstName") filterSource = `${employee[state.searchType]} ${employee.lastName}`.toLowerCase();
-            else filterSource = `${employee[state.searchType]}`.toLowerCase();
-            console.log(state.searchType);
-            console.log(filterSource)
-            return filterSource.includes(searchValue);
-        });
+            const searchValue = action.payload;
+            state.modifiedSource = state.originalSource.filter((employee) => {
+                let filterSource;
+                if (state.searchType === "firstName") filterSource = `${employee[state.searchType]} ${employee?.middleName} ${employee.lastName}`;
+                else filterSource = `${employee[state.searchType]}`;
+                return filterSource.includes(searchValue);
+            });
         },
         setChosenEmployee(state, action) {
-            state.chosenEmployee = {...action.payload};
+            state.chosenEmployee = { ...action.payload };
         }
     }
 })
+
 
 export const { storeEmployees, sortEmployees, setChosenEmployee, searchEmployeeBy, setEmployeeSearchType } = employeeSlice.actions
 

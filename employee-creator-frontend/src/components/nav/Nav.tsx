@@ -1,17 +1,19 @@
-import { RouteHighlighterContext } from "../../contexts/RouteHighlighterProvider"
-import { useContext } from "react"
+import { setAtCurrentNav } from "../../slices/app-slice/appSlice";
+import { useAppDispatch } from "../../utils/redux-hooks";
+import { useAppSelector } from "../../utils/redux-hooks";
 import { Link } from "react-router-dom"
 import styles from './Nav.module.scss'
 
 const Nav = () => {
-    const { atCurrentNav, setAtCurrentNav } = useContext(RouteHighlighterContext);
+    const dispatch = useAppDispatch();
+    const atCurrentNav = useAppSelector(state => state.app.atCurrentNav);
 
     return (
         <ul className={styles.Nav}>
             <li>
                 <Link
                     style={{ textDecoration: atCurrentNav === "" ? 'underline' : 'none' }}
-                    onClick={() => setAtCurrentNav("")}
+                    onClick={() => dispatch(setAtCurrentNav(""))}
                     role="view-link" to="/">View All
                 </Link>
             </li>
@@ -19,7 +21,7 @@ const Nav = () => {
             <li>
                 <Link
                     style={{ textDecoration: atCurrentNav === "create" ? 'underline' : 'none' }}
-                    onClick={() => setAtCurrentNav("create")}
+                    onClick={() => dispatch(setAtCurrentNav("create"))}
                     role="add-link" to="/create">Add
                 </Link>
             </li>

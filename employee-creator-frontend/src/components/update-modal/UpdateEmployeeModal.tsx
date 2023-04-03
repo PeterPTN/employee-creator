@@ -1,11 +1,10 @@
 import { useAppDispatch, useAppSelector } from '../../utils/redux-hooks';
-import { storeEmployees } from '../../slices/employeeSlice';
+import { storeEmployees } from '../../slices/employee-slice/employeeSlice';
 import { updateEmployee } from '../../utils/employee-services';
+import { setIsModalOpen } from '../../slices/app-slice/appSlice';
 import { SubmitHandler } from 'react-hook-form'
-import { ModalContext } from '../../contexts/ModalProvider';
 import { useMutation } from 'react-query';
 import { queryClient } from '../../App';
-import { useContext } from 'react';
 import { Employee } from '../../lib/Employee';
 import styles from './UpdateEmployeeModal.module.scss';
 import Form from '../form/Form';
@@ -14,7 +13,6 @@ const UpdateEmployeeModal = () => {
   const mutation = useMutation(updateEmployee);
   const dispatch = useAppDispatch();
   const employeeData = useAppSelector((state) => state.employees.chosenEmployee);
-  const { setIsModalOpen } = useContext(ModalContext);
 
   const onSubmit: SubmitHandler<Employee> = data => {
     mutation.mutate(data, {
@@ -22,7 +20,7 @@ const UpdateEmployeeModal = () => {
         queryClient.invalidateQueries()
         const newEmployees = await queryClient.fetchQuery<Employee[]>("getAllEmployees");
         dispatch(storeEmployees(newEmployees));
-        setIsModalOpen(false);
+        dispatch(setIsModalOpen(false));
       }
     })
   }

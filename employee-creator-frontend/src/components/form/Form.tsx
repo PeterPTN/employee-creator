@@ -1,8 +1,9 @@
 import { populateFormWithEmployeeData } from '../../utils/employee-services';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useContext, useEffect } from 'react';
 import { CreateEmployee } from '../../lib/CreateEmployee';
-import { ModalContext } from '../../contexts/ModalProvider';
+import { useAppDispatch } from '../../utils/redux-hooks';
+import { setIsModalOpen } from '../../slices/app-slice/appSlice';
+import { useEffect } from 'react';
 import { Employee } from '../../lib/Employee';
 import styles from './Form.module.scss'
 
@@ -13,10 +14,9 @@ interface FormProps {
 }
 
 const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
-    const { setIsModalOpen } = useContext(ModalContext);
     const additionalFormStyles = formType === "create" ? styles.CreateForm : styles.UpdateForm;
-
     const { setValue, register, handleSubmit, formState: { errors } } = useForm<Employee>();
+    const dispatch = useAppDispatch();
 
     const handleEndDateClick = () => {
         const checkbox = document.getElementById("onGoing") as HTMLInputElement;
@@ -26,6 +26,10 @@ const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
     const handleOnGoingClick = () => {
         const checkbox = document.getElementById("endDate") as HTMLInputElement;
         if (checkbox.value) checkbox.value = "";
+    }
+
+    const handleCloseClick = () => {
+        dispatch(setIsModalOpen(true));
     }
 
     useEffect(() => {
@@ -49,7 +53,7 @@ const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
 
     return (
         <form role="form" onSubmit={handleSubmit(onSubmit)} className={[styles.Form, additionalFormStyles].join(" ")}>
-            {formType === "update" && <button role="close-button" onClick={() => setIsModalOpen(false)} className={styles.CloseButton}>Close</button>}
+            {formType === "update" && <button role="close-button" onClick={handleCloseClick} className={styles.CloseButton}>Close</button>}
 
             <div className={styles.FormData}>
                 <div className={styles.FormColumn}>
@@ -79,12 +83,12 @@ const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
                     {errors.email && <p>{errors.email.message}</p>}
 
                     <label htmlFor="mobile">Mobile:*</label>
-                    <span className={styles.Mobile}>+61 <input id="mobile" type="tel" {...register("mobile", {
+                    <input id="mobile" type="tel" {...register("mobile", {
                         required: { value: true, message: "Mobile required" },
                         pattern: { value: /^04\d*$/, message: "Must start with 04 and include only numbers characters" },
                         maxLength: { value: 10, message: "Mobile can't be over 10 digits" },
                         minLength: { value: 10, message: "Must be a minimum of 10 digits" }
-                    })} /></span>
+                    })} />
                     {errors.mobile && <p>{errors.mobile.message}</p>}
 
                     <label htmlFor="address">Address:*</label>

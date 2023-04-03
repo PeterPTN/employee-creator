@@ -5,8 +5,8 @@ import { RootState } from "../store";
 import { Provider } from "react-redux";
 import { Employee } from "../lib/Employee";
 import { render } from "@testing-library/react";
-import employeeReducer from '../slices/employeeSlice';
-import ModalProvider from "../contexts/ModalProvider";
+import employeeReducer from '../slices/employee-slice/employeeSlice';
+import appReducer from '../slices/app-slice/appSlice';
 import React from "react";
 
 interface EmployeeState {
@@ -30,7 +30,10 @@ export function renderWithProviders(
         preloadedState = {},
         // Automatically create a store instance if no store was passed in
         store = configureStore({
-            reducer: { employees: employeeReducer },
+            reducer: {
+                employees: employeeReducer,
+                app: appReducer
+            },
             preloadedState,
         }),
         ...renderOptions
@@ -43,11 +46,9 @@ export function renderWithProviders(
     function Wrapper({ children }: { children: any }) {
         return (
             <MemoryRouter>
-                <ModalProvider>
-                    <QueryClientProvider client={queryClient}>
-                        <Provider store={store}>{children}</Provider>
-                    </QueryClientProvider>
-                </ModalProvider>
+                <QueryClientProvider client={queryClient}>
+                    <Provider store={store}>{children}</Provider>
+                </QueryClientProvider>
             </MemoryRouter>
         );
     }

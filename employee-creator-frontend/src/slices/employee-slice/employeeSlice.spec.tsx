@@ -1,5 +1,5 @@
 import { describe, it } from "vitest";
-import { Employee } from "../lib/Employee";
+import { Employee } from "../../lib/Employee";
 import reducer, {
     storeEmployees,
     sortEmployees,
@@ -103,7 +103,7 @@ describe('Employee Slice Actions', () => {
 
 
     it('should filter employee list by input and search type', () => {
-        expect(reducer(loadedState, searchEmployeeBy("jane"))).toEqual({
+        expect(reducer(loadedState, searchEmployeeBy("Jane"))).toEqual({
             originalSource: employees,
             // Jane
             modifiedSource: [loadedState.chosenEmployee],

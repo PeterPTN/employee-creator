@@ -1,10 +1,9 @@
 import { deleteEmployee, formatDateToAusStandard } from '../../utils/employee-services';
-import { storeEmployees, setChosenEmployee } from '../../slices/employeeSlice';
+import { storeEmployees, setChosenEmployee } from '../../slices/employee-slice/employeeSlice';
 import { useAppDispatch } from '../../utils/redux-hooks';
-import { ModalContext } from '../../contexts/ModalProvider';
+import { setIsModalOpen } from '../../slices/app-slice/appSlice';
 import { useMutation } from 'react-query';
 import { queryClient } from '../../App';
-import { useContext } from 'react';
 import { Employee } from '../../lib/Employee'
 import styles from './EmployeeCard.module.scss'
 
@@ -13,7 +12,6 @@ interface EmployeCardProps {
 }
 
 const EmployeeCard = ({ employee }: EmployeCardProps) => {
-    const { setIsModalOpen } = useContext(ModalContext);
     const name = `${employee.firstName} ${employee?.middleName} ${employee.lastName}`;
     const jobStatus = `${employee.contractType} - ${employee.jobType}`;
     const startDate = formatDateToAusStandard(employee.startDate);
@@ -33,7 +31,7 @@ const EmployeeCard = ({ employee }: EmployeCardProps) => {
     }
 
     const handleClickUpdate = () => {
-        setIsModalOpen(true);
+        dispatch(setIsModalOpen(true));
         dispatch(setChosenEmployee(employee));
     }
 

@@ -1,9 +1,9 @@
-import { useContext, useEffect } from 'react';
 import { getAllEmployees } from '../utils/employee-services'
 import { useAppSelector } from '../utils/redux-hooks';
-import { storeEmployees } from "../slices/employeeSlice";
+import { storeEmployees } from "../slices/employee-slice/employeeSlice";
 import { useAppDispatch } from '../utils/redux-hooks';
-import { ModalContext } from '../contexts/ModalProvider';
+import { setIsModalOpen } from '../slices/app-slice/appSlice';
+import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { Employee } from '../lib/Employee';
 import UpdateEmployeeModal from '../components/update-modal/UpdateEmployeeModal';
@@ -13,8 +13,8 @@ import EmployeeCard from '../components/employee-card/EmployeeCard';
 // Use shared form components
 const EmployeePage = () => {
   const dispatch = useAppDispatch();
-  const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
   const { data, error, isLoading } = useQuery<Employee[], { message: string }>(["getAllEmployees"], getAllEmployees);
+  const isModalOpen = useAppSelector(state => state.app.isModalOpen);
   const employees = useAppSelector(state => state.employees.modifiedSource);
 
   useEffect(() => {
@@ -23,11 +23,11 @@ const EmployeePage = () => {
 
   useEffect(() => {
     const clickHandler = (event: any) => {
-      if (event.target.className.includes("Modal")) setIsModalOpen(false);
+      if (event.target.className.includes("Modal")) dispatch(setIsModalOpen(false));
     }
 
     const escapeHandler = (event: any) => {
-      if (isModalOpen && event.key === "Escape") setIsModalOpen(false)
+      if (isModalOpen && event.key === "Escape") dispatch(setIsModalOpen(false));
     }
 
     document.addEventListener('click', clickHandler);
