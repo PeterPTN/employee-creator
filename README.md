@@ -1,4 +1,7 @@
-## Employee Creator
+# Employee Creator
+
+![React Tests Workflow](https://github.com/peterPTN/employee-creator/actions/workflows/react.yml/badge.svg)
+![SpringBoot Tests Workflow](https://github.com/peterPTN/employee-creator/actions/workflows/springboot.yml/badge.svg)
 
 ## Application Snippets
 
@@ -29,7 +32,50 @@ This application is an attempt at a full-stack application with a common stack t
  - Has a sort-by-ascending/descending order logic (just for name)
 
 ## Build Steps
-Coming soon...
+### To run this application you will need to do several things.
+Backend:
+ - Create and connect to a MySQL database base of the name 'employee-creator'. To also include some data I recommended using this code snippet.
+ ```
+ CREATE DATABASE employee_creator;
+USE employee_creator;
+
+CREATE TABLE employee(
+id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+firstName VARCHAR(255) NOT NULL,
+middleName VARCHAR(255),
+lastName VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+mobile VARCHAR(255) NOT NULL,
+address VARCHAR(255) NOT NULL,
+contractType VARCHAR(255) NOT NULL,
+jobType VARCHAR(255) NOT NULL,
+weeklyHours INT UNSIGNED NOT NULL,
+startDate DATE NOT NULL,
+endDate DATE,
+PRIMARY KEY(id)
+);
+
+INSERT INTO employee (firstName, middleName, lastName, email, mobile, address, contractType, jobType, weeklyHours, startDate, endDate)
+VALUES 
+('John', 'Doe', 'Smith', 'johndoe@example.com', "0431581851", '123 Main St', 'Permanent', 'Full-Time', 40, '2022-01-01', '2022-12-31'),
+('Jane', 'Marie', 'Johnson', 'janejohnson@example.com', "0435163481", '456 Elm St', "Contract", 'Part-Time', 20, '2022-02-01', '2022-05-31');
+ ```
+ - Next you will need an .env file at the root level of the SpringBoot application (employee-creator-api). Where ```<USERNAME>``` and ```<PASSWORD>``` are replaced by your database username and password. For example my values are ```root``` and ```helloworld1``` respectively.
+```
+SPRING_DATASOURCE_DEV_URL=jdbc:mysql://localhost:3306/employee_creator
+SPRING_DATASOURCE_DEV_USERNAME=<USERNAME>
+SPRING_DATASOURCE_DEV_PASSWORD=<PASSWORD>
+```
+ - You now should be able to run the SpringBoot application. I recommend using Eclispse as that's what I've used to develop this but any IDE with JVM should work. 
+ 
+Frontend:
+- You can run the frontend by simply running the following code snippet at the root level of the React application (employee-creator-frontend). 
+```
+npm install
+npm run dev
+```
+
+Deployment to come soon...
 
 ## Design Goals
 - The dependencies installed (ReactQuery, React-Hook-Forms, ReduxToolkit) were used as proof of concept that reflected something I would see in larger codebases, where DX, maintability and scalability are a concern. I was also quite comfortable writing simple custom hooks, using vanilla forms and using ReactContext so I thought it was time to up-skill a little further.
@@ -42,10 +88,5 @@ To preface, this was my first time using these front-end libraries (specified ab
 However I was convinced it was an issue with my babel transformation (which was necessary for MSW at the time). I'm confident I can resolve these issues the next time I use these dependencies. 
 
 ## Future Goals
-Currently tests assume best case scenario, therefore:
-- Add sophisticated component tests
-- Add sophisticated error handling for CRUD-logic test suites
+- Refactor front-end code to make it more easily scalable.
 
-
-
-### More to come...
