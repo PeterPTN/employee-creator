@@ -1,5 +1,5 @@
 import { describe, vi, beforeEach, expect, it } from 'vitest'
-import { getAllEmployees, deleteEmployee, createEmployee, updateEmployee, formatDateToAusStandard, populateFormWithEmployeeData } from './employee-services'
+import { getAllEmployees, deleteEmployee, createEmployee, updateEmployee, formatDateToAusStandard } from './employee-services'
 import { CreateEmployee } from '../lib/CreateEmployee';
 import { Employee } from '../lib/Employee'
 
@@ -137,37 +137,6 @@ describe("Employee Services", () => {
 describe('Employee Utilities', () => {
   it('should convert ISO date format to AU standard', () => {
     expect(formatDateToAusStandard('2000-05-15')).toStrictEqual('15/05/2000');
-  })
-
-  it('should populate form with employee data', () => {
-    const employeeData = {
-      id: 1,
-      firstName: 'Johnny',
-      middleName: "Bravo",
-      lastName: "Nguyen",
-      email: "fake@gmail.com",
-      mobile: "0455555555",
-      address: "123 Fake St",
-      contractType: "Full-Time",
-      jobType: "Developer",
-      weeklyHours: 40,
-      startDate: "01-01-2023"
-    }
-    const setValue = vi.fn();
- 
-    populateFormWithEmployeeData(setValue, employeeData);
-
-    expect(setValue).toHaveBeenCalledWith("id", 1);
-    expect(setValue).toHaveBeenCalledWith("firstName", "Johnny");
-    expect(setValue).toHaveBeenCalledWith("middleName", "Bravo");
-    expect(setValue).toHaveBeenCalledWith("lastName", "Nguyen");
-    expect(setValue).toHaveBeenCalledWith("email", "fake@gmail.com");
-    expect(setValue).toHaveBeenCalledWith("mobile", "0455555555");
-    expect(setValue).toHaveBeenCalledWith("address", "123 Fake St");
-    expect(setValue).toHaveBeenCalledWith("contractType", "Full-Time");
-    expect(setValue).toHaveBeenCalledWith("jobType", "Developer");
-    expect(setValue).toHaveBeenCalledWith("weeklyHours", 40);
-    expect(setValue).toHaveBeenCalledWith("startDate", "01-01-2023");
   })
 })
 

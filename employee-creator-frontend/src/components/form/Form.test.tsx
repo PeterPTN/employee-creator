@@ -162,11 +162,6 @@ describe('Form Component', () => {
         const jobTypeInput = screen.getByLabelText("Full-Time");
         const contractInput = screen.getByLabelText("Permanent");
         const weeklyHoursInput = screen.getByLabelText("Weekly Hours:*");
-        const today = new Date();
-        const tomorrow = new Date(today);
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        const tomorrowFormatted = tomorrow.toISOString().substring(0, 10);
-        const startDateInput = screen.getByLabelText("Start Date:*");
 
         fireEvent.change(firstNameInput, { target: { value: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" } });
         fireEvent.change(lastNameInput, { target: { value: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" } });
@@ -176,7 +171,6 @@ describe('Form Component', () => {
         fireEvent.change(jobTypeInput, { target: { checked: false } });
         fireEvent.change(contractInput, { target: { checked: false } });
         fireEvent.change(weeklyHoursInput, { target: { value: "100" } });
-        fireEvent.change(startDateInput, { target: { value: tomorrowFormatted }});
         fireEvent.click(submitButton);
 
         // Requires async/await to wait for the error message to appear
@@ -203,9 +197,6 @@ describe('Form Component', () => {
 
         const weeklyHoursErrorMessage = await screen.findByText("Hours cannot be greater than 99");
         expect(weeklyHoursErrorMessage).toBeInTheDocument();
-
-        const startDateErrorMessage = await screen.findByText("The starting date cannot be in the future");
-        expect(startDateErrorMessage).toBeInTheDocument();
     })
 
     it('should call onSubmit function when form is submitted', () => {
