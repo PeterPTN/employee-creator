@@ -19,6 +19,10 @@
         &:hover {
             filter: brightness(.9);
         }
+
+        &:active {
+            transform: scale(.99);
+        }
     }
 
     input[type="checkbox"],
@@ -29,7 +33,7 @@
 
     input[type="date"] {
         width: fit-content;
-    }
+    } 
 }
 
 .FormData {
@@ -102,15 +106,17 @@
 }
 
 .UpdateForm {
-    margin: auto;
-    width: 1050px;
+    max-width: 1050px;
     background-color: var(--greybackground);
     padding: 6rem 2rem 4rem;
-    margin-top: 5rem;
+    margin: 5rem auto 0;
     border: 1px solid rgb(55, 55, 55);
 
+    @media screen and (max-width: 1050px) {
+        margin: 5rem 1rem 0;
+    }
+
     @media screen and (max-width: 750px) {
-        width: auto;
         margin: 1rem
     }
 }
@@ -128,6 +134,10 @@
 
     &:hover {
         filter: brightness(.9);
+    }
+
+    &:active {
+        transform: scale(.99);
     }
 
     @media screen and (max-width: 750px) {

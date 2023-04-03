@@ -2,6 +2,7 @@ package peter.employeecreatorapi.employees;
 
 import java.time.LocalDate;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -47,7 +48,8 @@ public class CreateEmployeeDto {
 	@Past
 	@NotNull
 	private LocalDate startDate;
-
+	
+	@Nullable
 	private LocalDate endDate;
 	
 	public String getFirstName() {

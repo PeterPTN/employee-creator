@@ -34,6 +34,13 @@ public class EmployeeService {
 
 	public Employee updateEmployee(Employee employee, UpdateEmployeeDto data) {
 		mapper.map(data, employee);
+
+		/*
+		if (data.getEndDate() == null) {
+			employee.setEndDate(null);
+		}
+		*/
+
 		return this.employeeRepository.save(employee);
 	}
 

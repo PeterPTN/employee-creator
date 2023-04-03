@@ -2,6 +2,7 @@ package peter.employeecreatorapi.employees;
 
 import java.time.LocalDate;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -57,6 +58,7 @@ public class Employee {
 	private LocalDate startDate;
 	
 	@Column(name = "endDate")
+	@Nullable
 	private LocalDate endDate;
 	
 	public Employee() {}
@@ -64,7 +66,9 @@ public class Employee {
 	public Employee(String firstName, String middleName, String lastName, String email, String mobile,
 			String address, String contractType, String jobType, Integer weeklyHours, LocalDate startDate,
 			LocalDate endDate) {
+		
 		super();
+		System.out.println(endDate);
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;

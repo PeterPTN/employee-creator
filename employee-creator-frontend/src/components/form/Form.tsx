@@ -1,4 +1,3 @@
-import { populateFormWithEmployeeData } from '../../utils/employee-services';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { CreateEmployee } from '../../lib/CreateEmployee';
 import { useAppDispatch } from '../../utils/redux-hooks';
@@ -15,41 +14,60 @@ interface FormProps {
 
 const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
     const additionalFormStyles = formType === "create" ? styles.CreateForm : styles.UpdateForm;
-    const { setValue, register, handleSubmit, formState: { errors } } = useForm<Employee>();
+    const { setValue, reset, register, handleSubmit, formState: { errors } } = useForm<Employee>();
     const dispatch = useAppDispatch();
 
     const handleEndDateClick = () => {
-        const checkbox = document.getElementById("onGoing") as HTMLInputElement;
+        const checkbox = document.getElementById("ongoing") as HTMLInputElement;
         if (checkbox.checked === true) checkbox.checked = false;
+        setValue("ongoing", false);
     }
 
     const handleOnGoingClick = () => {
-        const checkbox = document.getElementById("endDate") as HTMLInputElement;
-        if (checkbox.value) checkbox.value = "";
+        const date = document.getElementById("endDate") as HTMLInputElement;
+        if (date.value) date.value = "";
+        setValue("endDate", "");
     }
 
     const handleCloseClick = () => {
         dispatch(setIsModalOpen(true));
     }
 
+    useForm({
+        defaultValues: {
+            firstName: employeeData?.firstName,
+            middleName: employeeData?.middleName,
+            lastName: employeeData?.lastName,
+            email: employeeData?.email,
+            startDate: employeeData?.startDate,
+            mobile: employeeData?.mobile,
+            address: employeeData?.address,
+            contractType: employeeData?.contractType,
+            jobType: employeeData?.jobType,
+            weeklyHours: employeeData?.weeklyHours,
+            endDate: employeeData?.endDate,
+        }
+    })
+
     useEffect(() => {
-        if (employeeData !== undefined) populateFormWithEmployeeData(setValue, employeeData)
+        if (employeeData !== undefined) reset(employeeData);
     }, [employeeData])
 
     useEffect(() => {
-        const enterHandler = (event: any) => {
-            if (event.key === "Enter") {
-                handleSubmit(onSubmit)();
-            }
+        if (formType === "create") {
+            const checkbox = document.getElementById("ongoing") as HTMLInputElement;
+            if (checkbox?.checked === false) checkbox.checked = true;
+            setValue("ongoing", true);
         }
+    }, [formType])
 
+    useEffect(() => {
+        const enterHandler = (event: any) => {
+            if (event.key === "Enter") handleSubmit(onSubmit)();
+        }
         document.addEventListener('keydown', enterHandler)
-
         return () => document.removeEventListener('keydown', enterHandler);
     }, [])
-
-    // Make input + labels into components somehow
-    // Errors to shake + colored red
 
     return (
         <form role="form" onSubmit={handleSubmit(onSubmit)} className={[styles.Form, additionalFormStyles].join(" ")}>
@@ -144,29 +162,24 @@ const Form = ({ onSubmit, formType, employeeData }: FormProps) => {
                     <label htmlFor="startDate">Start Date:*</label>
                     <input type="date" id="startDate" {...register("startDate", {
                         required: { value: true, message: "Please enter a starting date" },
-                        validate: (value, _) => new Date(value) > new Date() ? "The starting date cannot be in the future" : true
                     })} />
                     {errors.startDate && <p>{errors.startDate.message}</p>}
 
                     <label htmlFor="endDate">End Date:</label>
                     <span>
-                        <input onClick={handleEndDateClick} type="date" id="endDate" {...register("endDate", {
-                            validate: (value, _) => {
-                                if (value) return new Date(value) > new Date() ? "The ending date cannot be in the future" : true
-                            }
-                        })} />
+                        <input onClick={handleEndDateClick} type="date" id="endDate" {...register("endDate")} />
                     </span>
                     {errors.endDate && <p>{errors.endDate.message}</p>}
 
                     <span onClick={handleOnGoingClick}>
-                        <label htmlFor="onGoing">Ongoing</label>
-                        <input type="checkbox" id="onGoing" value="" {...register("endDate")} />
+                        <label htmlFor="ongoing">Ongoing</label>
+                        <input type="checkbox" id="ongoing" {...register("ongoing")} />
                     </span>
                 </div>
             </div>
 
             <input role="submit" type="submit" value="Submit" />
-        </form>
+        </form >
     )
 }
 

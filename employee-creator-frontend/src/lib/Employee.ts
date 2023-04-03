@@ -11,7 +11,8 @@ interface Employee {
     weeklyHours: number
     startDate: string
     endDate?: string
-    [key: string]: string | number | undefined ;
+    ongoing?: boolean
+    [key: string]: string | number | undefined | boolean ;
 }
 
 export type {Employee}

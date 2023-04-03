@@ -59,17 +59,9 @@ const updateEmployee = async (employeeData: Employee) => {
     return true;
 }
 
-const populateFormWithEmployeeData = (setValue: any, employeeData: CreateEmployee) => {
-    const employeeEntries = Object.entries(employeeData);
-    
-    employeeEntries.forEach((entry) => {
-        setValue(entry[0], entry[1]);
-    })
-}
-
 const formatDateToAusStandard = (date: string) => {
     const [year, month, day] = date.split("-");
     return `${day}/${month}/${year}`;
 }
 
-export {getAllEmployees, deleteEmployee, createEmployee, updateEmployee, populateFormWithEmployeeData, formatDateToAusStandard}
+export {getAllEmployees, deleteEmployee, createEmployee, updateEmployee, formatDateToAusStandard}

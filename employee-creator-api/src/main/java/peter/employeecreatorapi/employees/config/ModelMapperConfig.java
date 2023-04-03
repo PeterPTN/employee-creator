@@ -13,7 +13,7 @@ public class ModelMapperConfig {
 	public ModelMapper modelMapper() {
 		ModelMapper mapper = new ModelMapper();
 		mapper.typeMap(String.class, String.class).setConverter(new StringTrimConverter());
-		mapper.getConfiguration().setSkipNullEnabled(true);
+		mapper.getConfiguration().setSkipNullEnabled(false);
 		return mapper;
 	}
 }

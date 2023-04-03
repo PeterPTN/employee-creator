@@ -8,17 +8,21 @@
     }
 
     li {
-        padding: .25em .5em;
         border-radius: 2.5px;
         transition: all .1s;
-        background-color: rgb(30, 30, 30);
 
         a {
+            background-color: rgb(30, 30, 30);
+            padding: .25em .5em;
             color: var(--silver);
         }
 
         &:hover {
             filter: brightness(.9);
+        }
+
+        &:active {
+            transform: scale(.99);
         }
     }
 }
