@@ -27,14 +27,13 @@ This application is an attempt at a full-stack application with a common stack t
   - Create employees
   - Update employees
   - Delete employees
- To a custom SpringBoot server and database.
  - Has filter logic based on user-text input, filter can be set to name, email, address or mobile
  - Has a sort-by-ascending/descending order logic (just for name)
 
 ## Build Steps
 ### To run this application you will need to do several things.
 Backend:
- - Create and connect to a MySQL database base of the name 'employee-creator'. To also include some data I recommended using this code snippet.
+ - Create and connect to a MySQL database of the name 'employee-creator'. To also include some data I recommended using this code snippet.
  ```
  CREATE DATABASE employee_creator;
 USE employee_creator;
