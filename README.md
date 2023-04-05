@@ -74,9 +74,7 @@ npm install
 npm run dev
 ```
 
-Deployment to come soon...
-
-## Design Goals
+## Approach / Justifications
 - The dependencies installed (ReactQuery, React-Hook-Forms, ReduxToolkit) were used as proof of concept that reflected something I would see in larger codebases, where DX, maintability and scalability are a concern. I was also quite comfortable writing simple custom hooks, using vanilla forms and using ReactContext so I thought it was time to up-skill a little further.
 
 ## Problems Encountered
@@ -87,5 +85,5 @@ To preface, this was my first time using these front-end libraries (specified ab
 However I was convinced it was an issue with my babel transformation (which was necessary for MSW at the time). I'm confident I can resolve these issues the next time I use these dependencies. 
 
 ## Future Goals
-- Refactor front-end code to make it more easily scalable.
+- Dockerise
 
